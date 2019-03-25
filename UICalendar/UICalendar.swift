@@ -10,13 +10,13 @@ import Foundation
 import UIKit
 
 extension Date{
-    func getTodayDate() -> Int {
+    public func getTodayDate() -> Int {
         let calendar = Calendar.current
         let day = calendar.component(.day, from: self)
         return day
     }
     
-    func getCurrentDate() -> Date{
+    public func getCurrentDate() -> Date{
         let date = Date()
         let formatter = DateFormatter()
         formatter.dateFormat = "dd.MM.yyyy"
@@ -24,7 +24,7 @@ extension Date{
         return date
     }
     
-    func getDisplayDatesFromToday() -> [Date] {
+    public func getDisplayDatesFromToday() -> [Date] {
         var dateArray:[Date] = []
         let thisDate:Date = getCurrentDate()
         var duplicateDate : Date = getCurrentDate()
@@ -36,14 +36,14 @@ extension Date{
         return dateArray
     }
     
-    func changeToDisplayFormat() -> String{
+    public func changeToDisplayFormat() -> String{
         let inputFormatter = DateFormatter()
         inputFormatter.dateFormat = "MMM d, yyyy"
         let resultDateString = inputFormatter.string(from: self)
         return resultDateString
     }
     
-    func getWeekString() -> String{
+    public func getWeekString() -> String{
         let day = Calendar.current.component(.weekday, from: self)
         switch day {
         case 1:
@@ -65,7 +65,7 @@ extension Date{
         }
     }
     
-    func getMonthString() -> String{
+    public func getMonthString() -> String{
         let month = Calendar.current.component(.month, from: self)
         switch month {
         case 1:
@@ -98,7 +98,7 @@ extension Date{
     }
 }
 
-extension UIView{
+public extension UIView{
     func initCalendar(context:UIViewController) -> MyCalendarView{
         print("init calendar")
         var calendar:MyCalendarView = MyCalendarView.init(onView:self, context:context)
@@ -107,17 +107,17 @@ extension UIView{
     
 }
 
-class MyCalendarView{
+public class MyCalendarView{
     private var scrollView:UIScrollView!
     private var dateLabel:UILabel!
     private var xOffset:Int
     private var rootController:UIViewController?
-    var delegate:MyCalendarDelegate?
+    public var delegate:MyCalendarDelegate?
     private var prevButton:UIButton?
     private var dateArray:[Date]?
     var selectedDate:Date?
     private var buttons:[UIButton]?
-    var initialHeight:CGFloat?
+    public var initialHeight:CGFloat?
     
     //customization
     var scrollViewColor:UIColor?
@@ -145,7 +145,8 @@ class MyCalendarView{
         self.dateBackgroundColor = UIColor.clear
     }
     
-    func populateScrollView(dateArray:[Date]){
+    
+    public func populateScrollView(dateArray:[Date]){
         print("populate scroll View")
         self.dateArray = dateArray
         for (i,d) in dateArray.enumerated(){
@@ -176,7 +177,7 @@ class MyCalendarView{
         }
     }
     
-    func loadToday(){
+    public func loadToday(){
         print("sadsd")
         print(self.dateArray?.count)
         let center = ((self.dateArray?.count)!/2) - 1
@@ -215,3 +216,5 @@ class MyCalendarView{
 public protocol MyCalendarDelegate{
     func onClick(button : UIButton, date:Date)
 }
+
+
