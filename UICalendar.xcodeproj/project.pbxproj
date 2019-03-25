@@ -13,6 +13,7 @@
 		3493B4A02248ABE200FF3D7D /* UICalendar.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3493B49E2248ABE200FF3D7D /* UICalendar.xcdatamodeld */; };
 		3493B4A22248ABE300FF3D7D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3493B4A12248ABE300FF3D7D /* Assets.xcassets */; };
 		3493B4A52248ABE300FF3D7D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3493B4A32248ABE300FF3D7D /* LaunchScreen.storyboard */; };
+		3493B4AD2248AC9200FF3D7D /* UICalendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3493B4AC2248AC9200FF3D7D /* UICalendar.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		3493B4A12248ABE300FF3D7D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3493B4A42248ABE300FF3D7D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3493B4A62248ABE300FF3D7D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3493B4AC2248AC9200FF3D7D /* UICalendar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICalendar.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +65,7 @@
 				3493B4A32248ABE300FF3D7D /* LaunchScreen.storyboard */,
 				3493B4A62248ABE300FF3D7D /* Info.plist */,
 				3493B49E2248ABE200FF3D7D /* UICalendar.xcdatamodeld */,
+				3493B4AC2248AC9200FF3D7D /* UICalendar.swift */,
 			);
 			path = UICalendar;
 			sourceTree = "<group>";
@@ -141,6 +144,7 @@
 				3493B49A2248ABE200FF3D7D /* ViewController.swift in Sources */,
 				3493B4982248ABE200FF3D7D /* AppDelegate.swift in Sources */,
 				3493B4A02248ABE200FF3D7D /* UICalendar.xcdatamodeld in Sources */,
+				3493B4AD2248AC9200FF3D7D /* UICalendar.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
