@@ -108,14 +108,14 @@ public extension UIView{
 }
 
 public class MyCalendarView{
-    private var scrollView:UIScrollView!
+    public var scrollView:UIScrollView!
     private var dateLabel:UILabel!
     private var xOffset:Int
     private var rootController:UIViewController?
     public var delegate:MyCalendarDelegate?
     private var prevButton:UIButton?
     private var dateArray:[Date]?
-    var selectedDate:Date?
+    public var selectedDate:Date?
     private var buttons:[UIButton]?
     public var initialHeight:CGFloat?
     
@@ -209,6 +209,16 @@ public class MyCalendarView{
     
     func displayDate(date:Date){
         self.dateLabel.text = date.changeToDisplayFormat()
+    }
+    
+    public func hideScrollView()
+    {
+        scrollView.isHidden = !scrollView.isHidden
+    }
+    
+    public func updateFrame(_ width:CGFloat)
+    {
+        scrollView.frame = CGRect(x: scrollView.frame.origin.x, y: scrollView.frame.origin.y, width: width, height: scrollView.frame.height)
     }
     
 }
