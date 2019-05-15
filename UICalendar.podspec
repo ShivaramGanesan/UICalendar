@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'UICalendar'
-  s.version          = '1.2'
+  s.version          = '1.3'
   s.summary          = 'Custom Calendar UI'
  
   s.description      = <<-DESC
@@ -12,7 +12,7 @@ MyPod
   s.author           = { 'Shivaram Ganesan' => 'shivaramganesan0406@gmail.com' }
   s.source           = { :git => 'https://github.com/ShivaramGanesan/UICalendar.git', :tag => s.version.to_s }
  
-  s.ios.deployment_target = '10.0'
+  s.ios.deployment_target = '9.0'
   s.source_files = 'UICalendar/UICalendar.swift'
  
 end
