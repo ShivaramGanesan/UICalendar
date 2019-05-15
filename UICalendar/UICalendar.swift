@@ -28,8 +28,8 @@ extension Date{
         var dateArray:[Date] = []
         let thisDate:Date = getCurrentDate()
         var duplicateDate : Date = getCurrentDate()
-        duplicateDate = Calendar.current.date(byAdding: .day, value: -10, to: duplicateDate)!
-        for i in 0...20{
+        duplicateDate = Calendar.current.date(byAdding: .day, value: -13, to: duplicateDate)!
+        for i in 0...26{
             dateArray.append(Calendar.current.date(byAdding: .day, value: 1, to: duplicateDate)!)
             duplicateDate = Calendar.current.date(byAdding: .day, value: 1, to: duplicateDate)!
         }
@@ -47,19 +47,19 @@ extension Date{
         let day = Calendar.current.component(.weekday, from: self)
         switch day {
         case 1:
-            return "Sun"
+            return "SUN"
         case 2:
-            return "Mon"
+            return "MON"
         case 3:
-            return "Tue"
+            return "TUE"
         case 4:
-            return "Wed"
+            return "WED"
         case 5:
-            return "Thu"
+            return "THU"
         case 6:
-            return "Fri"
+            return "FRI"
         case 7:
-            return "Sat"
+            return "SAT"
         default:
             return ""
         }
@@ -112,7 +112,7 @@ public class MyCalendarView{
     private var dateLabel:UILabel!
     private var xOffset:Int
     private var rootController:UIViewController?
-    public var delegate:MyCalendarDelegate?
+    public weak var delegate:MyCalendarDelegate?
     private var prevButton:UIButton?
     private var dateArray:[Date]?
     public var selectedDate:Date?
@@ -129,16 +129,18 @@ public class MyCalendarView{
         //ideal height of UIView = 140
         print("Mycalendar View init")
         
-        let viewHeight = onView.frame.height/2
-        self.scrollView = UIScrollView(frame : CGRect(x:0, y:0, width:onView.bounds.width, height:viewHeight+10))
-        self.dateLabel = UILabel(frame : CGRect(x:0, y:70, width:onView.bounds.width, height:viewHeight-10))
+        self.scrollView = UIScrollView(frame : CGRect(x:0, y:0, width:onView.bounds.width, height:onView.bounds.height+10))
+        scrollView.backgroundColor = UIColor.clear
+        
+        onView.addSubview(self.scrollView)
+        
         self.xOffset = 10
         self.rootController = context
         self.initialHeight = onView.bounds.height
         scrollView.showsHorizontalScrollIndicator = false
-        self.dateLabel.textAlignment = .center
-        onView.addSubview(self.scrollView)
-        onView.addSubview(self.dateLabel)
+        //        self.dateLabel.textAlignment = .center
+        //        onView.addSubview(self.scrollView)
+        //        onView.addSubview(self.dateLabel)
         self.selectedDate = Date().getCurrentDate()
         self.scrollViewColor = UIColor.clear
         self.displayDateColor = UIColor.black
@@ -146,32 +148,48 @@ public class MyCalendarView{
     }
     
     
+    
     public func populateScrollView(dateArray:[Date]){
         print("populate scroll View")
         self.dateArray = dateArray
-        for (i,d) in dateArray.enumerated(){
+        for (i,d) in dateArray.enumerated()
+        {
             let button = UIButton(type: UIButton.ButtonType.custom)
             let dayLabel = UILabel()
             
-            button.tag = i
-            button.backgroundColor = UIColor.clear
-            button.setTitle("\(d.getTodayDate())", for: .normal)
-            button.setTitleColor(UIColor.black, for: .normal)
-            button.layer.cornerRadius = 25
+            if(i <= 2 || i >= dateArray.count - 3)
+            {
+                button.setTitleColor(UIColor.lightGray, for: .normal)
+                button.isEnabled = false
+            }
+            else
+            {
+                button.setTitleColor(UIColor.black, for: .normal)
+            }
             
-            button.layer.borderWidth = 1
-            button.layer.borderColor = UIColor.black.cgColor
-            button.frame = CGRect(x:self.xOffset, y:10, width:50, height:50)
-            dayLabel.frame = CGRect(x:self.xOffset, y:45, width:50, height:50)
+            button.tag = i
+            button.backgroundColor = UIColor.white
+            button.setTitle("\(d.getTodayDate())", for: .normal)
+            button.titleLabel?.font = UIFont.systemFont(ofSize: 23)
+            button.layer.cornerRadius = 20
+            
+            
+            button.frame = CGRect(x:self.xOffset + 5, y:35, width:40, height:40)
+            dayLabel.frame = CGRect(x:self.xOffset, y:10, width:50, height:20)
+            
             dayLabel.text = d.getWeekString()
+            dayLabel.font = UIFont.systemFont(ofSize: 10)
+            dayLabel.textColor = UIColor.gray
             dayLabel.textAlignment = .center
+            
             button.isUserInteractionEnabled = true
             self.buttons?.append(button)
             button.addTarget(self, action: #selector(self.buttonClicked), for: .touchDown)
-            self.xOffset = (self.xOffset) + (10) + Int(button.frame.size.width)
             
-            self.scrollView.addSubview(button)
+            self.xOffset = (self.xOffset) + (20) + Int(button.frame.size.width)
+            
             self.scrollView.addSubview(dayLabel)
+            self.scrollView.addSubview(button)
             
             self.scrollView.contentSize = CGSize(width:CGFloat(xOffset), height:self.scrollView.frame.height)
         }
@@ -184,8 +202,9 @@ public class MyCalendarView{
         print(center)
         let todayButton = self.scrollView.viewWithTag(center) as! UIButton
         self.prevButton = todayButton
-        todayButton.backgroundColor = UIColor.cyan
-        self.dateLabel.text = Date().getCurrentDate().changeToDisplayFormat()
+        todayButton.backgroundColor = UIColor.init(red: 17/255, green: 105/255, blue: 195/255, alpha: 1)
+        todayButton.setTitleColor(UIColor.white, for: .normal)
+        //        self.dateLabel.text = Date().getCurrentDate().changeToDisplayFormat()
         moveToCenter(button: todayButton)
     }
     
@@ -200,15 +219,17 @@ public class MyCalendarView{
         moveToCenter(button: sender)
         self.selectedDate = self.dateArray?[sender.tag]
         displayDate(date: self.selectedDate!)
-        self.prevButton?.backgroundColor = UIColor.clear
-        sender.backgroundColor = UIColor.cyan
+        self.prevButton?.backgroundColor = UIColor.white
+        self.prevButton?.setTitleColor(UIColor.black, for: .normal)
+        sender.backgroundColor = UIColor.init(red: 17/255, green: 105/255, blue: 195/255, alpha: 1)
+        sender.setTitleColor(UIColor.white, for: .normal)
         self.prevButton = sender
         delegate?.onClick(button: sender, date:self.selectedDate!)
         
     }
     
     func displayDate(date:Date){
-        self.dateLabel.text = date.changeToDisplayFormat()
+        //        self.dateLabel.text = date.changeToDisplayFormat()
     }
     
     public func hideScrollView()
@@ -223,8 +244,7 @@ public class MyCalendarView{
     
 }
 
-public protocol MyCalendarDelegate{
+public protocol MyCalendarDelegate:class
+{
     func onClick(button : UIButton, date:Date)
 }
-
-

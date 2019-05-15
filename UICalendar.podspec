@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'UICalendar'
-  s.version          = '2.0'
+  s.version          = '2.1'
   s.summary          = 'Custom Calendar UI'
  
   s.description      = <<-DESC
